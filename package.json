@@ -2,13 +2,16 @@
   "name": "react-electron-app-from-scratch",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "./public/electron.js",
   "scripts": {
-    "start": "webpack serve --open --mode development",
     "test": "echo \"Error: no test specified\" && exit 1",
     "format": "prettier --write \"src/**/*.js\"",
     "eslint-fix": "eslint --fix \"src/**/*.js\"",
-    "build": "webpack --mode production"
+    "build": "webpack --mode production",
+    "electron-start": "electron .",
+    "start-react-open": "webpack serve --open --mode development",
+    "start-react": "webpack serve --mode development",
+    "start": "concurrently \"cross-env BROWSER=none npm run start-react\" \"wait-on http://localhost:8080 && electron .\""
   },
   "repository": {
     "type": "git",
@@ -31,7 +34,12 @@
     "@babel/preset-react": "^7.13.13",
     "babel-eslint": "^10.1.0",
     "babel-loader": "^8.2.2",
+    "concurrently": "^6.0.0",
+    "cross-env": "^7.0.3",
     "css-loader": "^5.2.0",
+    "electron": "^12.0.2",
+    "electron-builder": "^22.10.5",
+    "electron-is-dev": "^2.0.0",
     "eslint": "^7.23.0",
     "eslint-config-react": "^1.1.7",
     "eslint-loader": "^4.0.2",
@@ -41,6 +49,7 @@
     "less-loader": "^8.0.0",
     "prettier": "2.2.1",
     "style-loader": "^2.0.0",
+    "wait-on": "^5.3.0",
     "webpack": "^5.28.0",
     "webpack-cli": "^4.6.0",
     "webpack-dev-server": "^3.11.2"
